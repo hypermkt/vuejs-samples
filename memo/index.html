@@ -1,8 +1,36 @@
 <html>
 <head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-validator/1.4.4/vue-validator.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="./app.js"></script>
 </head>
 <body>
+<div id="app">
+  <validator name="validation">
+  <h1>メモ</h1>
 
+  <p><button v-on:click="changeDisplayState(true)">追加</button></p>
+  <p><textarea v-model="content" v-show="showContentForm"></textarea></p>
+  <p>
+    <button v-on:click="changeDisplayState(false)">キャンセル</button>
+    <button v-on:click="addItem">作成</button>
+  </p>
+
+  <p>
+    <input type="text" id="search" name="search" placeholder="検索" v-validate:search="{ minlength: 5 }">
+    <p v-if="$validation.search.minlength">Your search text is too short.</p>
+    <button>新しい順</button><button>古い順</button>
+  </p>
+
+  <ul v-for="item in items">
+    <li>
+    <p>{{ item.content}}</p>
+    <p>{{ item.createdAt }} <a href="#">編集</a> <a href="#">削除</a></p>
+    </li>
+  </ul>
+
+  </validator>
+</div>
 </body>
 </html>
