@@ -1,5 +1,7 @@
 ### https://raw.github.com/github/gitignore/10eb19db07e36f5b8b26315ec90e27c5e82a4b47/Node.gitignore
 
+app.js
+
 # Logs
 logs
 *.log
@@ -34,5 +36,4 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
-
 
