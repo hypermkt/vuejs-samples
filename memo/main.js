@@ -7,6 +7,7 @@ $(function() {
   new Vue({
     el: '#app',
     data: {
+      order: 1,
       showContentForm: false,
       content: '',
       items: []
