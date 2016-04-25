@@ -1,0 +1,22 @@
+{
+  "name": "memo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "vue": "^1.0.21"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.1",
+    "jquery": "^2.2.3",
+    "vinyl-source-stream": "^1.1.0",
+    "vue": "^1.0.21",
+    "vue-validator": "^2.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
