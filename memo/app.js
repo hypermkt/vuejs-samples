@@ -9,6 +9,7 @@ $(function() {
     el: '#app',
     data: {
       order: 1,
+      search: '',
       showContentForm: false,
       content: '',
       items: []
