@@ -22,6 +22,9 @@ $(function() {
           content: this.content,
           createdAt: moment().format('YYYY/MM/DD HH:mm:ss')
         });
+      },
+      removeItem: function(item) {
+        this.items.$remove(item);
       }
     }
   });

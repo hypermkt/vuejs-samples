@@ -28,7 +28,7 @@
   <ul v-for="item in items | orderBy 'createdAt' order | filterBy search in 'content'">
     <li>
     <p>{{ item.content}}</p>
-    <p>{{ item.createdAt }} <a href="#">編集</a> <a href="#">削除</a></p>
+    <p>{{ item.createdAt }} <a href="#">編集</a> <a href="#" v-on:click="removeItem(item)">削除</a></p>
     </li>
   </ul>
 
