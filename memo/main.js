@@ -1,7 +1,7 @@
 var $ = require('jquery');
 var Vue = require('vue');
-var VueValidator = require('vue-validator');
-Vue.use(VueValidator);
+var moment = require('moment');
+Vue.use(require('vue-validator'));
 
 $(function() {
   new Vue({
@@ -9,9 +9,7 @@ $(function() {
     data: {
       showContentForm: false,
       content: '',
-      items: [
-        { content: 'コンテント', createdAt: 'yyyy/mm/dd' }
-      ]
+      items: []
     },
     methods: {
       changeDisplayState: function(state) {
@@ -20,7 +18,7 @@ $(function() {
       addItem: function() {
         this.items.push({
           content: this.content,
-          createdAt: 'yyyy/mm/dd'
+          createdAt: moment().format('YYYY/MM/DD HH:mm:ss')
         });
       }
     }
