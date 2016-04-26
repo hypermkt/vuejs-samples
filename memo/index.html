@@ -9,7 +9,7 @@
 
   <p><button v-on:click="changeDisplayState(true)">追加</button></p>
   <p>
-    <textarea v-model="content" v-show="showContentForm" v-validate:content="{ required: true, maxlength: 200 }"></textarea>
+    <input type="text" v-model="content" v-show="showContentForm" v-validate:content="{ required: true, maxlength: 200 }" />
     <div v-if="$validation.content.dirty">
       <p v-if="$validation.content.required">本文は必須です。</p>
       <p v-if="$validation.content.maxlength">200文字以内で入力してください</p>
@@ -28,7 +28,7 @@
   <ul v-for="item in items | orderBy 'createdAt' order | filterBy search in 'content'">
     <li>
     <p>
-      <textarea v-model="editedContent" v-show="item == editingItem" />{{ item.content}}</textarea>
+      <input type="text" v-model="editedContent" v-show="item == editingItem" value="{{ item.content}}" />
       <button v-show="item == editingItem" @click="saveItem(item)">保存</button>
       <span v-else>{{ item.content}}</span>
     </p>
