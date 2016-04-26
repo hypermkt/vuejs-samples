@@ -12,7 +12,8 @@ $(function() {
       showContentForm: false,
       content: '',
       items: [],
-      editingItem: null
+      editingItem: null,
+      editedContent: ''
     },
     methods: {
       changeDisplayState: function(state) {
@@ -30,8 +31,8 @@ $(function() {
       editItem: function(item) {
         this.editingItem = item;
       },
-      saveItem: function() {
-        // TODO: 該当アイテムを更新する
+      saveItem: function(item) {
+        item.content = this.editedContent
         this.editingItem = null;
       }
     }
