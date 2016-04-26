@@ -7,7 +7,7 @@
   <validator name="validation">
   <h1>メモ</h1>
 
-  <p><button v-on:click="changeDisplayState(true)">追加</button></p>
+  <p><button v-on:click="showContentForm = true">追加</button></p>
   <p>
     <input type="text" v-model="content" v-show="showContentForm" v-validate:content="{ required: true, maxlength: 200 }" />
     <div v-if="$validation.content.dirty">
@@ -16,13 +16,13 @@
     </div>
   </p>
   <p>
-    <button v-on:click="changeDisplayState(false)">キャンセル</button>
-    <button v-on:click="addItem">作成</button>
+    <button @click="showContentForm = false">キャンセル</button>
+    <button @click="addItem">作成</button>
   </p>
 
   <p>
     <input type="text" v-model="search" id="search" name="search" placeholder="検索">
-    <button v-on:click="order = 1">昇順</button><button v-on:click="order = -1">降順</button>
+    <button @click="order = 1">昇順</button><button @click="order = -1">降順</button>
   </p>
 
   <ul v-for="item in items | orderBy 'createdAt' order | filterBy search in 'content'">
@@ -32,7 +32,7 @@
       <button v-show="item == editingItem" @click="saveItem(item)">保存</button>
       <span v-else>{{ item.content}}</span>
     </p>
-    <p>{{ item.createdAt }} <a href="#" @click="editItem(item)">編集</a> <a href="#" v-on:click="removeItem(item)">削除</a></p>
+    <p>{{ item.createdAt }} <a href="#" @click="editItem(item)">編集</a> <a href="#" @click="removeItem(item)">削除</a></p>
     </li>
   </ul>
 

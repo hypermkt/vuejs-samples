@@ -16,9 +16,6 @@ $(function() {
       editedContent: ''
     },
     methods: {
-      changeDisplayState: function(state) {
-        this.showContentForm = state;
-      },
       addItem: function() {
         this.items.push({
           content: this.content,
