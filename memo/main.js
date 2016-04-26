@@ -11,7 +11,8 @@ $(function() {
       search: '',
       showContentForm: false,
       content: '',
-      items: []
+      items: [],
+      editingItem: null
     },
     methods: {
       changeDisplayState: function(state) {
@@ -25,6 +26,13 @@ $(function() {
       },
       removeItem: function(item) {
         this.items.$remove(item);
+      },
+      editItem: function(item) {
+        this.editingItem = item;
+      },
+      saveItem: function() {
+        // TODO: 該当アイテムを更新する
+        this.editingItem = null;
       }
     }
   });
