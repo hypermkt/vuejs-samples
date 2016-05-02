@@ -1,0 +1,24 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="./app.js"></script>
+</head>
+<body>
+<div id="app">
+  <modal
+    :show.sync="showModal"
+    :master_items.sync="master_items"></modal>
+
+  <ul>
+    <template v-for="item in items">
+    <li>
+      <p>順位: {{ item.rank }}位<p>
+      <p><a href="javascript:void(0)" @click="openList">クリックしてください</a><p>
+      <p><textarea></textarea><p>
+    </li>
+    </template>
+  </ul>
+
+</div>
+</body>
+</html>
