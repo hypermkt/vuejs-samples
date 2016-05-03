@@ -6,6 +6,7 @@ $(function() {
   new Vue({
     el: '#app',
     data: {
+      selectedIndex: null,
       master_items: [
         { id: 1, title: 'hoge A' },
         { id: 2, title: 'hoge B' },
@@ -14,16 +15,16 @@ $(function() {
         { id: 5, title: 'hoge E' }
       ],
       items: [
-        { rank: 1, id: null },
-        { rank: 2, id: null },
-        { rank: 3, id: null },
-        { rank: 4, id: null },
-        { rank: 5, id: null },
-        { rank: 6, id: null },
-        { rank: 7, id: null },
-        { rank: 8, id: null },
-        { rank: 9, id: null },
-        { rank: 10, id: null }
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
       ],
       showModal: false
     },
@@ -31,8 +32,20 @@ $(function() {
       modal: Modal
     },
     methods: {
-      openList: function() {
+      openList: function(index) {
         this.showModal = true;
+        this.selectedIndex = index;
+      },
+      save: function() {
+        console.log(JSON.stringify(this.items));
+      }
+    },
+    events: {
+      'select-item' : function(item) {
+        this.items.$set(this.selectedIndex, {
+          id: item.id,
+          title: item.title
+        });
       }
     }
   });

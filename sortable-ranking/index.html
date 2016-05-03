@@ -5,16 +5,17 @@
 </head>
 <body>
 <div id="app">
+  <button @click="save">保存</button>
   <modal
     :show.sync="showModal"
     :master_items.sync="master_items"></modal>
 
   <ul>
-    <template v-for="item in items">
+    <template v-for="(index, item) in items" track-by="$index">
     <li>
-      <p>順位: {{ item.rank }}位<p>
-      <p><a href="javascript:void(0)" @click="openList">クリックしてください</a><p>
-      <p><textarea></textarea><p>
+      <p>順位: {{ index + 1 }}位<p>
+      <p><a href="javascript:void(0)" @click="openList(index)"><span v-if="item.title">{{ item.title }}</span><span v-else>クリックしてください</span></a><p>
+      <p><textarea v-model="item.content"></textarea><p>
     </li>
     </template>
   </ul>

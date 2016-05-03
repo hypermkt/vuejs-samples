@@ -81,8 +81,8 @@ export default {
   props: ['show', 'master_items'],
   methods: {
     selectItem: function(item) {
-      console.log("selectItems");
       this.show = false; 
+      this.$dispatch('select-item', item);
     }
   }
 }
