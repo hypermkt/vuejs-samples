@@ -1,6 +1,8 @@
-var $ = require('jquery');
 var Vue = require('vue');
 var Modal = require('./components/modal.vue');
+var vueDragAndDrop = require('vue-drag-and-drop');
+
+Vue.use(vueDragAndDrop);
 
 $(function() {
   new Vue({
@@ -8,11 +10,11 @@ $(function() {
     data: {
       selectedIndex: null,
       master_items: [
-        { id: 1, title: 'hoge A' },
-        { id: 2, title: 'hoge B' },
-        { id: 3, title: 'hoge C' },
-        { id: 4, title: 'hoge D' },
-        { id: 5, title: 'hoge E' }
+        { id: 1, title: 'りんご' },
+        { id: 2, title: 'メロン' },
+        { id: 3, title: 'いちご' },
+        { id: 4, title: 'パイナップル' },
+        { id: 5, title: 'もも' }
       ],
       items: [
         {},
@@ -38,6 +40,23 @@ $(function() {
       },
       save: function() {
         console.log(JSON.stringify(this.items));
+      },
+      handleDrop: function(itemOne, itemTwo) {
+        var dummy = this.items[itemOne.id];
+        this.items.$set(itemOne.id, this.items[itemTwo.id]);
+        this.items.$set(itemTwo.id, dummy);
+      },
+      handleDragStart: function(elm) {
+         console.log("handleDragStart");
+      },
+      handleDragEnter: function(elm) {
+         console.log("handleDragEnter");
+      },
+      handleDragOver: function(elm) {
+         console.log("handleDragOver");
+      },
+      handleDragLeave: function(elm) {
+         console.log("handleDragLeave");
       }
     },
     events: {
