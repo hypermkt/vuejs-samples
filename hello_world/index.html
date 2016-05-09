@@ -1,0 +1,23 @@
+<html>
+<head>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.22/vue.js'></script>  
+<script type="text/javascript">
+<!--
+window.onload = function() {  
+  var demo = new Vue({
+    el: '#demo',
+    data: {
+      message: 'Hello Vue.js!'
+    }
+  });
+};
+// -->
+</script>
+</head>
+<body>
+  <div id="demo">
+    <p>{{message}}</p>
+    <input v-model="message">
+  </div>
+</body>
+</html>
