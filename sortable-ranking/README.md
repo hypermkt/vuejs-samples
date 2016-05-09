@@ -1,13 +1,8 @@
-# MEMO
-## Overview
-This is a memo CRUD app using Vue.js.
-
-## Keywords
-* vue, vue-validator, moment, directive
+# Sortable Ranking
 
 ## Usage
 ### Browserify
-`$ browserify main.js -p app.js`
+`$ browserify -t vueify main.js -o app.js`
 
 ### Gulp watch
 * Watch main.js and generate app.js automatically.

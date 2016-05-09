@@ -1,7 +1,6 @@
 var Vue = require('vue');
 var Modal = require('./components/modal.vue');
 var vueDragAndDrop = require('vue-drag-and-drop');
-
 Vue.use(vueDragAndDrop);
 
 $(function() {
@@ -45,18 +44,6 @@ $(function() {
         var dummy = this.items[itemOne.id];
         this.items.$set(itemOne.id, this.items[itemTwo.id]);
         this.items.$set(itemTwo.id, dummy);
-      },
-      handleDragStart: function(elm) {
-         console.log("handleDragStart");
-      },
-      handleDragEnter: function(elm) {
-         console.log("handleDragEnter");
-      },
-      handleDragOver: function(elm) {
-         console.log("handleDragOver");
-      },
-      handleDragLeave: function(elm) {
-         console.log("handleDragLeave");
       }
     },
     events: {
