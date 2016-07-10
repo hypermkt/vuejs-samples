@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<script type="text/javascript" src="./app.js"></script>
 <meta charset="utf-8">
 </head>
 <body>
-<div class="container" style="margin: 10px;">
+<div class="container" style="margin: 10px;" id="app">
   <form>
     <fieldset class="form-group">
       <label>タイトル</label>
@@ -13,45 +15,93 @@
       <label>説明文</label>
       <textarea class="form-control" rows="3"></textarea>
     </fieldset>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default">見出し</button>
-      <button type="button" class="btn btn-default">本文</button>
-      <button type="button" class="btn btn-default">画像</button>
-    </div>
-    <br />
-    <br />
 
-    <p>見出し入力フォーム</p>
-    <select>
-      <option>中見出し</option>
-      <option>小見出し</option>
-    </select>
-    <input type="title" class="form-control" >
-    <p>
-    <button type="button" class="btn btn-default btn-lg">キャンセル</button>
-    <button type="button" class="btn btn-default btn-lg">保存</button>
-    </p>
-    <p>本文入力フォーム</p>
-    <textarea class="form-control" rows="3"></textarea>
-    <p>
-    <button type="button" class="btn btn-default btn-lg">キャンセル</button>
-    <button type="button" class="btn btn-default btn-lg">保存</button>
-    </p>
-    <p>画像投稿</p>
     <fieldset class="form-group">
-       <p>画像タイトル</p>
-       <input type="title" class="form-control" >
-       <div class="row">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"
+          @click="showTitle">見出し</button>
+        <button type="button" class="btn btn-default"
+          @click="showBody">本文</button>
+        <button type="button" class="btn btn-default"
+          @click="showImage">画像</button>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group" v-if="title_form">
+      <legend>見出し入力フォーム</legend>
+      <select v-model="type">
+        <option value="title">中見出し</option>
+        <option value="sub_title">小見出し</option>
+      </select>
+      <input class="form-control" v-model="title">
+      <p>
+      <button type="button" class="btn btn-default btn-lg"
+        @click="title_form=false">キャンセル</button>
+      <button type="button" class="btn btn-default btn-lg"
+        @click="addItem('title')">保存</button>
+      </p>
+    </fieldset>
+
+    <fieldset class="form-group"
+      v-if="body_form">
+      <legend>本文入力フォーム</legend>
+      <textarea class="form-control" rows="3"
+        v-model="body"></textarea>
+      <p>
+      <button type="button" class="btn btn-default btn-lg"
+        @click="body_form=false">キャンセル</button>
+      <button type="button" class="btn btn-default btn-lg"
+        @click="addItem('body')">保存</button>
+      </p>
+    </fieldset>
+
+    <fieldset class="form-group"
+      v-if="image_form">
+      <legend>画像投稿</legend>
+      <p>画像タイトル</p>
+      <input type="text" class="form-control"
+        v-model="img_title">
+      <div class="row">
         <div class="col-md-4">
           <img src="https://iemo.jp/ngapp/images/bg_add_photo.png" width="300px" class="img-rounded" />
         </div>
         <div class="col-md-8">
+          <p>画像URL</p>
+          <input type="text" class="form-control"
+            v-model="img_src">
           <p>画像説明</p>
-          <textarea class="form-control" rows="3"></textarea>
-          <button type="button" class="btn btn-default btn-lg">保存</button>
+          <textarea class="form-control" rows="3"
+            v-model="img_body"></textarea>
+          <button type="button" class="btn btn-default btn-lg"
+            @click="image_form=false">キャンセル</button>
+          <button type="button" class="btn btn-default btn-lg"
+            @click="addItem('image')">保存</button>
         </div>
       </div>     
     </fieldset>
+
+    <template v-for="item in items">
+      <h2 v-if="item.type=='title' && item.title != ''">{{ item.title }}</h2>
+      <h3 v-if="item.type=='sub_title' && item.title != ''">{{ item.title }}</h3>
+      <p v-if="item.type=='body' && item.body != ''">{{ item.body }}</p>
+
+      <div v-if="item.type=='image'">
+        <h3>{{ item.img_title }}</h3>
+        <div class="row">
+          <div class="col-md-4">
+            <img v-bind:src="item.img_src" width="300px" class="img-rounded" />
+          </div>
+          <div class="col-md-8">
+            <p>{{ item.img_body }}</p>
+          </div>
+        </div>
+      </div>
+
+      <button @click="removeItem(item)">削除</button>
+    </template>
+    <br />
+    <br />
+    <!--
     <h2>中見出し(h2)</h2>
     <p>あいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえお</p>
     <h3>小見出し(h3)</h3>
@@ -67,6 +117,7 @@
       </div>
     </div>
     <br />
+    -->
 
     <button type="submit" class="btn btn-primary">下書き</button>
     <button type="submit" class="btn btn-primary">公開</button>
