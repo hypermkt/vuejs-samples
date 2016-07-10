@@ -14,6 +14,14 @@ $(function() {
         image_form: false,
         items: []
       },
+      created: function() {
+        console.log("hoge");
+        var hoge = this;
+        //console.log(hoge);
+        setInterval(function() {
+          console.log(hoge.items);
+        }, 1000);
+      },
       methods: {
         // アイテムを追加
         addItem: function(form_kind) {
@@ -30,11 +38,20 @@ $(function() {
             item.img_body = this.img_body;
             item.img_src = this.img_src;
           }
-          console.log(item);
 
           this.items.push(item);
           this.closeAllItemForms();
           this.clearItemForm();
+        },
+        // アイテムを挿入する
+        insertItem: function(item) {
+          console.log(this.items);
+          var ret = this.items.splice(1, 0, {
+            type: 'title',
+            title: 'hoge'
+          });
+          console.log("ret : " + ret );
+          console.log(this.items);
         },
         // アイテムを削除
         removeItem: function(item) {
