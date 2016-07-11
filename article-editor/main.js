@@ -1,4 +1,5 @@
 var Vue = require('vue');
+
 $(function() {
   new Vue({
     el: '#app',
@@ -24,7 +25,7 @@ $(function() {
             item.title = this.title;
             item.type = this.type;
           } else if (form_kind == 'body') {
-            item.body = this.body;
+             item.body = this.body;
           } else if (form_kind == 'image') {
             item.img_title = this.img_title;
             item.img_body = this.img_body;

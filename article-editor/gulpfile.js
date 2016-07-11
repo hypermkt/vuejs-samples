@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var browserify = require('browserify');
-var vueify = require('vueify');
+var vueify = require('gulp-vueify');
 var source= require('vinyl-source-stream');
 
 // browserifyを実行しファイル結合を行う
