@@ -19,7 +19,7 @@ exports.default = {
     };
   },
 
-  props: ['items'],
+  props: ['items', 'show_close_btn'],
   methods: {
     showTitle: function showTitle() {
       this.clearItemForm();
@@ -74,7 +74,7 @@ exports.default = {
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<fieldset class=\"form-group\">\n  <div class=\"btn-group\" role=\"group\">\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showTitle\">見出し</button>\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showBody\">本文</button>\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showImage\">画像</button>\n  </div>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"title_form\">\n  <legend>見出し入力フォーム</legend>\n  <select v-model=\"type\">\n    <option value=\"title\">中見出し</option>\n    <option value=\"sub_title\">小見出し</option>\n  </select>\n  <input class=\"form-control\" v-model=\"title\">\n  <p>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"title_form=false\">キャンセル</button>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('title')\">保存</button>\n  </p>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"body_form\">\n  <legend>本文入力フォーム</legend>\n  <textarea class=\"form-control\" rows=\"3\" v-model=\"body\"></textarea>\n  <p>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"body_form=false\">キャンセル</button>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('body')\">保存</button>\n  </p>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"image_form\">\n  <legend>画像投稿</legend>\n  <p>画像タイトル</p>\n  <input type=\"text\" class=\"form-control\" v-model=\"img_title\">\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <img src=\"https://iemo.jp/ngapp/images/bg_add_photo.png\" width=\"300px\" class=\"img-rounded\">\n    </div>\n    <div class=\"col-md-8\">\n      <p>画像URL</p>\n      <input type=\"text\" class=\"form-control\" v-model=\"img_src\">\n      <p>画像説明</p>\n      <textarea class=\"form-control\" rows=\"3\" v-model=\"img_body\"></textarea>\n      <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"image_form=false\">キャンセル</button>\n      <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('image')\">保存</button>\n    </div>\n  </div>     \n</fieldset>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<fieldset class=\"form-group\">\n  <div class=\"btn-group\" role=\"group\">\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showTitle\">見出し</button>\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showBody\">本文</button>\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showImage\">画像</button>\n  </div>\n  <button v-if=\"show_close_btn\">閉じる</button>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"title_form\">\n  <legend>見出し入力フォーム</legend>\n  <select v-model=\"type\">\n    <option value=\"title\">中見出し</option>\n    <option value=\"sub_title\">小見出し</option>\n  </select>\n  <input class=\"form-control\" v-model=\"title\">\n  <p>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"title_form=false\">キャンセル</button>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('title')\">保存</button>\n  </p>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"body_form\">\n  <legend>本文入力フォーム</legend>\n  <textarea class=\"form-control\" rows=\"3\" v-model=\"body\"></textarea>\n  <p>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"body_form=false\">キャンセル</button>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('body')\">保存</button>\n  </p>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"image_form\">\n  <legend>画像投稿</legend>\n  <p>画像タイトル</p>\n  <input type=\"text\" class=\"form-control\" v-model=\"img_title\">\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <img src=\"https://iemo.jp/ngapp/images/bg_add_photo.png\" width=\"300px\" class=\"img-rounded\">\n    </div>\n    <div class=\"col-md-8\">\n      <p>画像URL</p>\n      <input type=\"text\" class=\"form-control\" v-model=\"img_src\">\n      <p>画像説明</p>\n      <textarea class=\"form-control\" rows=\"3\" v-model=\"img_body\"></textarea>\n      <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"image_form=false\">キャンセル</button>\n      <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('image')\">保存</button>\n    </div>\n  </div>     \n</fieldset>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -99,14 +99,6 @@ $(function() {
       items: []
     },
     methods: {
-      // アイテムを挿入する
-      insertItem: function(index) {
-        menuBox.$appendTo('#app');
-//          this.items.splice((index + 1), 0, {
-//            type: 'title',
-//            title: 'hoge'
-//          });
-      },
       // アイテムを削除
       removeItem: function(item) {
         this.items.$remove(item);

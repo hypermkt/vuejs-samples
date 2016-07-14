@@ -8,6 +8,9 @@
       <button type="button" class="btn btn-default"
         @click="showImage">画像</button>
     </div>
+    <button
+      v-if="show_close_btn"
+      >閉じる</button>
   </fieldset>
 
   <fieldset class="form-group" v-if="title_form">
@@ -76,10 +79,10 @@ export default {
        type: 'title',
        title_form: false,
        body_form: false,
-       image_form: false
+       image_form: false,
     }
   },
-  props: ['items'],
+  props: ['items', 'show_close_btn'],
   methods: {
     showTitle: function() {
       this.clearItemForm();
