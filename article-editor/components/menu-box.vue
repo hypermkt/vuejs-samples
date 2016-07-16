@@ -114,6 +114,10 @@ export default {
         item.img_src = this.img_src;
       }
       var index = (typeof this.index === 'undefined') ? 0 : this.index + 1;
+      // 固定表示させるメニューボックス以外のメニューボックスは、アイテムが追加されたら閉じる
+      if (index > 0) {
+        this.show_menu_box = false;
+      }
       this.items.splice(index, 0, item);
       this.closeAllItemForms();
       this.clearItemForm();
