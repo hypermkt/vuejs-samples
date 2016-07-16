@@ -11,8 +11,6 @@ $(function() {
     }, 
     data: {
       items: []
-    },
-    methods: {
     }
   });
 });
