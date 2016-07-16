@@ -20,7 +20,7 @@
 
     <menu_box
       :items.sync="items"
-      :show_menu_box=show_menu_box
+      :show_menu_box.sync=show_menu_box
       has_close_btn=true
     ></menu_box>   
 
