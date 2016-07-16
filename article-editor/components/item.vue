@@ -21,6 +21,7 @@
     <menu_box
       :items.sync="items"
       :show_menu_box.sync=show_menu_box
+      :index=index
       has_close_btn=true
     ></menu_box>   
 
@@ -30,7 +31,7 @@
 import MenuBox from './menu-box.vue'
 
 export default {
-  props: ['item', 'items'],
+  props: ['item', 'items', 'index'],
   components: {
     menu_box: MenuBox
   },

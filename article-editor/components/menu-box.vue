@@ -84,7 +84,7 @@ export default {
        //show_menu_box: true
     }
   },
-  props: ['items', 'has_close_btn', 'show_menu_box'],
+  props: ['index', 'items', 'has_close_btn', 'show_menu_box'],
   methods: {
     showTitle: function() {
       this.clearItemForm();
@@ -113,7 +113,11 @@ export default {
         item.img_body = this.img_body;
         item.img_src = this.img_src;
       }
-      this.items.push(item);
+      if (typeof this.index === 'undefined') {
+        this.items.push(item);
+      } else {
+        this.items.splice(this.index + 1, 0, item);
+      }
       this.closeAllItemForms();
       this.clearItemForm();
     },
