@@ -113,11 +113,8 @@ export default {
         item.img_body = this.img_body;
         item.img_src = this.img_src;
       }
-      if (typeof this.index === 'undefined') {
-        this.items.push(item);
-      } else {
-        this.items.splice(this.index + 1, 0, item);
-      }
+      var index = (typeof this.index === 'undefined') ? 0 : this.index + 1;
+      this.items.splice(index, 0, item);
       this.closeAllItemForms();
       this.clearItemForm();
     },
