@@ -1,5 +1,5 @@
-<template>
-  <fieldset class="form-group">
+<template >
+  <fieldset class="form-group" v-if="show_menu_box">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default"
         @click="showTitle">見出し</button>
@@ -9,7 +9,8 @@
         @click="showImage">画像</button>
     </div>
     <button
-      v-if="show_close_btn"
+      v-if="has_close_btn"
+      @click="show_menu_box=false"
       >閉じる</button>
   </fieldset>
 
@@ -80,9 +81,10 @@ export default {
        title_form: false,
        body_form: false,
        image_form: false,
+       //show_menu_box: true
     }
   },
-  props: ['items', 'show_close_btn'],
+  props: ['items', 'has_close_btn', 'show_menu_box'],
   methods: {
     showTitle: function() {
       this.clearItemForm();
@@ -111,7 +113,6 @@ export default {
         item.img_body = this.img_body;
         item.img_src = this.img_src;
       }
-
       this.items.push(item);
       this.closeAllItemForms();
       this.clearItemForm();

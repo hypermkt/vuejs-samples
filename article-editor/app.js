@@ -4,6 +4,49 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _menuBox = require('./menu-box.vue');
+
+var _menuBox2 = _interopRequireDefault(_menuBox);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  props: ['item', 'items'],
+  components: {
+    menu_box: _menuBox2.default
+  },
+  data: function data() {
+    return {
+      show_menu_box: false
+    };
+  },
+
+  methods: {
+    // アイテムを削除
+    removeItem: function removeItem(item) {
+      this.items.$remove(item);
+    }
+  }
+};
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<h2 v-if=\"item.type=='title' &amp;&amp; item.title != ''\">{{ item.title }}</h2>\n<h3 v-if=\"item.type=='sub_title' &amp;&amp; item.title != ''\">{{ item.title }}</h3>\n<p v-if=\"item.type=='body' &amp;&amp; item.body != ''\">{{ item.body }}</p>\n\n<div v-if=\"item.type=='image'\">\n  <h3>{{ item.img_title }}</h3>\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <img v-bind:src=\"item.img_src\" width=\"300px\" class=\"img-rounded\">\n    </div>\n    <div class=\"col-md-8\">\n      <p>{{ item.img_body }}</p>\n    </div>\n  </div>\n</div>\n\n<button @click=\"show_menu_box=true\">追加</button>\n<button @click=\"removeItem(item)\">削除</button>\n\n<menu_box :items.sync=\"items\" :show_menu_box=\"show_menu_box\" has_close_btn=\"true\"></menu_box>   \n\n"
+if (module.hot) {(function () {  module.hot.accept()
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), true)
+  if (!hotAPI.compatible) return
+  if (!module.hot.data) {
+    hotAPI.createRecord("_v-123ff8b6", module.exports)
+  } else {
+    hotAPI.update("_v-123ff8b6", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+  }
+})()}
+},{"./menu-box.vue":2,"vue":6,"vue-hot-reload-api":5}],2:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.default = {
   data: function data() {
     return {
@@ -19,7 +62,7 @@ exports.default = {
     };
   },
 
-  props: ['items', 'show_close_btn'],
+  props: ['items', 'has_close_btn', 'show_menu_box'],
   methods: {
     showTitle: function showTitle() {
       this.clearItemForm();
@@ -48,7 +91,6 @@ exports.default = {
         item.img_body = this.img_body;
         item.img_src = this.img_src;
       }
-
       this.items.push(item);
       this.closeAllItemForms();
       this.clearItemForm();
@@ -74,7 +116,7 @@ exports.default = {
   }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<fieldset class=\"form-group\">\n  <div class=\"btn-group\" role=\"group\">\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showTitle\">見出し</button>\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showBody\">本文</button>\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showImage\">画像</button>\n  </div>\n  <button v-if=\"show_close_btn\">閉じる</button>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"title_form\">\n  <legend>見出し入力フォーム</legend>\n  <select v-model=\"type\">\n    <option value=\"title\">中見出し</option>\n    <option value=\"sub_title\">小見出し</option>\n  </select>\n  <input class=\"form-control\" v-model=\"title\">\n  <p>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"title_form=false\">キャンセル</button>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('title')\">保存</button>\n  </p>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"body_form\">\n  <legend>本文入力フォーム</legend>\n  <textarea class=\"form-control\" rows=\"3\" v-model=\"body\"></textarea>\n  <p>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"body_form=false\">キャンセル</button>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('body')\">保存</button>\n  </p>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"image_form\">\n  <legend>画像投稿</legend>\n  <p>画像タイトル</p>\n  <input type=\"text\" class=\"form-control\" v-model=\"img_title\">\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <img src=\"https://iemo.jp/ngapp/images/bg_add_photo.png\" width=\"300px\" class=\"img-rounded\">\n    </div>\n    <div class=\"col-md-8\">\n      <p>画像URL</p>\n      <input type=\"text\" class=\"form-control\" v-model=\"img_src\">\n      <p>画像説明</p>\n      <textarea class=\"form-control\" rows=\"3\" v-model=\"img_body\"></textarea>\n      <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"image_form=false\">キャンセル</button>\n      <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('image')\">保存</button>\n    </div>\n  </div>     \n</fieldset>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<fieldset class=\"form-group\" v-if=\"show_menu_box\">\n  <div class=\"btn-group\" role=\"group\">\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showTitle\">見出し</button>\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showBody\">本文</button>\n    <button type=\"button\" class=\"btn btn-default\" @click=\"showImage\">画像</button>\n  </div>\n  <button v-if=\"has_close_btn\" @click=\"show_menu_box=false\">閉じる</button>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"title_form\">\n  <legend>見出し入力フォーム</legend>\n  <select v-model=\"type\">\n    <option value=\"title\">中見出し</option>\n    <option value=\"sub_title\">小見出し</option>\n  </select>\n  <input class=\"form-control\" v-model=\"title\">\n  <p>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"title_form=false\">キャンセル</button>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('title')\">保存</button>\n  </p>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"body_form\">\n  <legend>本文入力フォーム</legend>\n  <textarea class=\"form-control\" rows=\"3\" v-model=\"body\"></textarea>\n  <p>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"body_form=false\">キャンセル</button>\n  <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('body')\">保存</button>\n  </p>\n</fieldset>\n\n<fieldset class=\"form-group\" v-if=\"image_form\">\n  <legend>画像投稿</legend>\n  <p>画像タイトル</p>\n  <input type=\"text\" class=\"form-control\" v-model=\"img_title\">\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <img src=\"https://iemo.jp/ngapp/images/bg_add_photo.png\" width=\"300px\" class=\"img-rounded\">\n    </div>\n    <div class=\"col-md-8\">\n      <p>画像URL</p>\n      <input type=\"text\" class=\"form-control\" v-model=\"img_src\">\n      <p>画像説明</p>\n      <textarea class=\"form-control\" rows=\"3\" v-model=\"img_body\"></textarea>\n      <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"image_form=false\">キャンセル</button>\n      <button type=\"button\" class=\"btn btn-default btn-lg\" @click=\"addItem('image')\">保存</button>\n    </div>\n  </div>     \n</fieldset>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)
@@ -85,29 +127,27 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-d2ae6900", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"vue":5,"vue-hot-reload-api":4}],2:[function(require,module,exports){
+},{"vue":6,"vue-hot-reload-api":5}],3:[function(require,module,exports){
 var Vue = require('vue');
 var MenuBox = require('./components/menu-box.vue');
+var Item = require('./components/item.vue');
 
 $(function() {
   var vm = new Vue({
     el: '#app',
     components: {
-      menu_box: MenuBox
+      menu_box: MenuBox,
+      item: Item,
     }, 
     data: {
       items: []
     },
     methods: {
-      // アイテムを削除
-      removeItem: function(item) {
-        this.items.$remove(item);
-      }, 
     }
   });
 });
 
-},{"./components/menu-box.vue":1,"vue":5}],3:[function(require,module,exports){
+},{"./components/item.vue":1,"./components/menu-box.vue":2,"vue":6}],4:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -228,7 +268,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var Vue // late bind
 var map = Object.create(null)
 var shimmed = false
@@ -529,7 +569,7 @@ function format (id) {
   return match ? match[0] : id
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (process,global){
 /*!
  * Vue.js v1.0.26
@@ -10606,4 +10646,4 @@ setTimeout(function () {
 
 module.exports = Vue;
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":3}]},{},[2]);
+},{"_process":4}]},{},[3]);
