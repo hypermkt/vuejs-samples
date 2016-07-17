@@ -1,6 +1,6 @@
 <template>
-    <h2 v-if="item.type=='title' && item.title != ''">{{ item.title }}</h2>
-    <h3 v-if="item.type=='sub_title' && item.title != ''">{{ item.title }}</h3>
+    <h2 v-if="item.type=='title' && item.title_type == 'header' && item.title != ''">{{ item.title }}</h2>
+    <h3 v-if="item.type=='title' && item.title_type == 'sub_header' && item.title != ''">{{ item.title }}</h3>
     <p v-if="item.type=='body' && item.body != ''">{{ item.body }}</p>
 
     <div v-if="item.type=='image'">
@@ -16,7 +16,7 @@
     </div>
 
     <button @click="show_menu_box=true">追加</button>
-    <button @click="editItem">編集</button>
+    <button @click="editItem(item)">編集</button>
     <button @click="removeItem(item)">削除</button>
 
     <menu_box
@@ -42,8 +42,8 @@ export default {
     }
   },
   methods: {
-    editItem: function() {
-      this.$dispatch('editItem');
+    editItem: function(item) {
+      this.$broadcast('startEditing', item);
     },
     removeItem: function(item) {
       this.$dispatch('removeItem', item);

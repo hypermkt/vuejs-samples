@@ -10,7 +10,8 @@ $(function() {
       item: Item,
     }, 
     data: {
-      items: []
+      items: [
+      ]
     },
     events: {
       addItem: function(index, item) {
