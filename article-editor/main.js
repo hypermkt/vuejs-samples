@@ -1,6 +1,9 @@
 var Vue = require('vue');
+var VueValidator = require('vue-validator');
 var MenuBox = require('./components/menu-box.vue');
 var Item = require('./components/item.vue');
+
+Vue.use(VueValidator);
 
 $(function() {
   var vm = new Vue({
