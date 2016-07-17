@@ -16,6 +16,7 @@
     </div>
 
     <button @click="show_menu_box=true">追加</button>
+    <button @click="editItem">編集</button>
     <button @click="removeItem(item)">削除</button>
 
     <menu_box
@@ -41,9 +42,12 @@ export default {
     }
   },
   methods: {
+    editItem: function() {
+      this.$dispatch('editItem');
+    },
     removeItem: function(item) {
       this.$dispatch('removeItem', item);
-    },          
+    },
   }
 }
 </script>
