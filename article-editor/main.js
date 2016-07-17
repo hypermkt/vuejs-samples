@@ -13,13 +13,13 @@ $(function() {
       items: []
     },
     events: {
-      'addItem': function(index, item) {
+      addItem: function(index, item) {
         this.items.splice(index, 0, item);
       },
-      'editItem': function(index, item) {
+      editItem: function(index, item) {
         this.items.$set(index, item);
       },
-      'removeItem': function(item) {
+      removeItem: function(item) {
         this.items.$remove(item);
       }
     }
