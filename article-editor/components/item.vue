@@ -28,7 +28,6 @@
     <button @click="removeItem(item)">削除</button>
 
     <menu_box
-      :items.sync="items"
       :show_menu_box.sync=show_menu_box
       :index=index
       has_close_btn=true

@@ -97,10 +97,9 @@ export default {
        image_form: false,
     }
   },
-  props: ['index', 'items', 'has_close_btn', 'show_menu_box'],
+  props: ['index', 'has_close_btn', 'show_menu_box'],
   methods: {
     showInputForm: function(kind, item) {
-      console.log("showInputForm");
       if (typeof item === 'undefined') {
         this.clearItemForm();
       } else {
