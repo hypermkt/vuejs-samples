@@ -17,6 +17,14 @@
 
     <button @click="show_menu_box=true">追加</button>
     <button @click="editItem(item)">編集</button>
+    <button
+      v-if="index > 0" // 最上部の場合は表示しない
+      @click="moveItem('up')"
+      >↑</button>
+    <button
+      v-if="items.length -1 != index" // 最下部の場合は表示しない
+      @click="moveItem('down')"
+      >↓</button>
     <button @click="removeItem(item)">削除</button>
 
     <menu_box
@@ -42,6 +50,10 @@ export default {
     }
   },
   methods: {
+    moveItem: function(mode) {
+      var to = (mode == 'up') ? this.index - 1 : this.index + 1;
+      this.$dispatch('moveItem', this.index, to);
+    },
     editItem: function(item) {
       this.$broadcast('startEditing', item);
     },

@@ -13,8 +13,7 @@ $(function() {
       items: [
       ]
     },
-    events: {
-      addItem: function(index, item) {
+    events: { addItem: function(index, item) {
         this.items.splice(index, 0, item);
       },
       editItem: function(index, item) {
@@ -22,6 +21,12 @@ $(function() {
       },
       removeItem: function(item) {
         this.items.$remove(item);
+      },
+      // Up/DownによるItemの移動
+      moveItem: function(from, to) {
+        var tempItem = this.items[to];
+        this.items.$set(to, this.items[from]);
+        this.items.$set(from, tempItem);
       }
     }
   });
