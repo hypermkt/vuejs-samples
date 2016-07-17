@@ -41,9 +41,8 @@ export default {
     }
   },
   methods: {
-    // アイテムを削除
     removeItem: function(item) {
-      this.items.$remove(item);
+      this.$dispatch('removeItem', item);
     },          
   }
 }

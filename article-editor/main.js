@@ -11,6 +11,14 @@ $(function() {
     }, 
     data: {
       items: []
+    },
+    events: {
+      'addItem': function(index, item) {
+        this.items.splice(index, 0, item);
+      },
+      'removeItem': function(item) {
+        this.items.$remove(item);
+      }
     }
   });
 });

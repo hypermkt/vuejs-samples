@@ -118,7 +118,7 @@ export default {
       if (index > 0) {
         this.show_menu_box = false;
       }
-      this.items.splice(index, 0, item);
+      this.$dispatch('addItem', index, item);
       this.closeAllItemForms();
       this.clearItemForm();
     },
