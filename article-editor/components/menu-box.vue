@@ -15,12 +15,15 @@
   </fieldset>
 
   <fieldset class="form-group" v-if="title_form">
+    <validator name="validation_title_form">
     <legend>見出し入力フォーム</legend>
     <select v-model="title_type">
       <option value="header">中見出し</option>
       <option value="sub_header">小見出し</option>
     </select>
-    <input class="form-control" v-model="title">
+    <input class="form-control"
+      v-model="title"
+      >
     <p>
     <button type="button" class="btn btn-default btn-lg"
       @click="title_form=false">キャンセル</button>
@@ -31,6 +34,9 @@
       v-if="mode == 'edit'"
       @click="editItem('title')">更新</button>
     </p>
+    <p class="bg-danger" v-if="$validation_title_form.title.required">タイトルは必須です。</p>
+    <p class="bg-danger" v-if="$validation_title_form.title.maxlength">タイトルは30文字以下で入力してください</p>
+    </validator>
   </fieldset>
 
   <fieldset class="form-group"
@@ -109,6 +115,14 @@ export default {
     },
     // アイテムを追加
     addItem: function(kind) {
+      var that = this;
+      this.$validate(true, function() {
+        console.log(that.$validation_title_form.invalid); 
+        if (that.$validation_title_form.invalid) {
+          return;
+        } 
+      });
+
       var item = this.createItem(kind);
       var index = (typeof this.index === 'undefined') ? 0 : this.index + 1;
       // 固定表示させるメニューボックス以外のメニューボックスは、アイテムが追加されたら閉じる
@@ -120,6 +134,10 @@ export default {
       this.clearItemForm();
     },
     editItem: function(kind) {
+      //console.log(this.$validation_title_form.invalid);
+      if (this.$validation_title_form.invalid) {
+        return;
+      } 
       this.$dispatch('editItem', this.index, this.createItem(kind));
     },
     createItem: function(kind) {

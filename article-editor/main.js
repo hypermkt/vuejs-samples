@@ -16,7 +16,8 @@ $(function() {
       items: [
       ]
     },
-    events: { addItem: function(index, item) {
+    events: {
+      addItem: function(index, item) {
         this.items.splice(index, 0, item);
       },
       editItem: function(index, item) {
