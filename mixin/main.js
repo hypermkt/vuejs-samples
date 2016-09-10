@@ -1,6 +1,6 @@
-var Vue = require('vue');
-var Header = require('./components/header.vue');
-var Footer = require('./components/footer.vue');
+import Vue from 'vue';
+import Header from './components/header.vue';
+import Footer from './components/footer.vue';
 
 new Vue({
   el: '#app',
