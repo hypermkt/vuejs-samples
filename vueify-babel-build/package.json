@@ -1,8 +1,4 @@
 {
-  "name": "mixin",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "browserify -e main.js -o app.js"
   },
@@ -12,7 +8,6 @@
       "babelify"
       ]
   },
-  "author": "",
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-plugin-transform-runtime": "^6.15.0",
