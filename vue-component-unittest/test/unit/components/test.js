@@ -18,18 +18,21 @@ describe('Testコンポーネント', () => {
     expect(vm.myName()).to.be.eql('Yamada Taro')
   });
 
-  // it('fetchProfileを呼ぶとAPIを実行して、this.profileにnickname情報が入る', (done) => {
-  //   let profile = { nickname : 'hoge' };
-  //   Vue.http = {
-  //     get () {
-  //       return Promise.resolve(profile)
-  //     }
-  //   }
-  //
-  //   Vue.nextTick(() => {
-  //     expect(vm.profile).to.be.eql(profile)
-  //     done();
-  //   })
-  //
-  // });
+  it('vue-resourceを利用した場合のテストケース', (done) => {
+    let profile = { nickname : 'hoge' };
+    Vue.http = {
+      get () {
+        return Promise.resolve(profile)
+      }
+    }
+
+    const vm = new Test()
+    vm.fetchProfile();
+
+    Vue.nextTick(() => {
+      expect(vm.profile).to.be.eql(profile)
+      done();
+    })
+
+  });
 });
