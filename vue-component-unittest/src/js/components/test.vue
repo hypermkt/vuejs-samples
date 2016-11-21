@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     myName: function() {
-      return this.$router.name + ' Taro';
+      return this.$route.params.name + ' Taro';
     },
     fetchProfile: function(done) {
       Vue.http.get('http://localhost:8000/api/profile').then((response) => {
@@ -28,7 +28,6 @@ export default {
         console.log("failure");
       });
     }
-   },
   }
 }
 </script>

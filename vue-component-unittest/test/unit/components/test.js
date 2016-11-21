@@ -9,6 +9,15 @@ describe('Testコンポーネント', () => {
     expect(_Test.methods.fetchProfile).to.be.a('function');
   });
 
+  it('vue-routerを利用した場合のテストケース', function() {
+    const vm = new Test({
+      beforeCreate() {
+        this.$route = { params: { name: 'Yamada' } }
+      }
+    });
+    expect(vm.myName()).to.be.eql('Yamada Taro')
+  });
+
   // it('fetchProfileを呼ぶとAPIを実行して、this.profileにnickname情報が入る', (done) => {
   //   let profile = { nickname : 'hoge' };
   //   Vue.http = {
