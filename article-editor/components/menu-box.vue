@@ -20,7 +20,9 @@
       <option value="header">中見出し</option>
       <option value="sub_header">小見出し</option>
     </select>
-    <input class="form-control" v-model="title">
+    <input class="form-control"
+      v-model="title"
+      >
     <p>
     <button type="button" class="btn btn-default btn-lg"
       @click="title_form=false">キャンセル</button>

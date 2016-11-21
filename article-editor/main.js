@@ -1,6 +1,9 @@
 var Vue = require('vue');
+var VueValidator = require('vue-validator');
 var MenuBox = require('./components/menu-box.vue');
 var Item = require('./components/item.vue');
+
+Vue.use(VueValidator);
 
 $(function() {
   var vm = new Vue({
@@ -13,7 +16,8 @@ $(function() {
       items: [
       ]
     },
-    events: { addItem: function(index, item) {
+    events: {
+      addItem: function(index, item) {
         this.items.splice(index, 0, item);
       },
       editItem: function(index, item) {
