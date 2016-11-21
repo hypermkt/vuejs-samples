@@ -11,16 +11,16 @@ import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
 export default {
-  data: function() {
+  data() {
     return {
       profile: {}
     }
   },
   methods: {
-    myName: function() {
+    myName() {
       return this.$route.params.name + ' Taro';
     },
-    fetchProfile: function(done) {
+    fetchProfile() {
       Vue.http.get('http://localhost:8000/api/profile').then((response) => {
         console.log("success");
         this.profile = response.json();
