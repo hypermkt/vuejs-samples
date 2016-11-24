@@ -1,0 +1,80 @@
+--- src/js/components/test.vue	Thu Nov 24 07:51:09 2016
++++ src/js/components/test.vue	Thu Nov 24 07:53:51 2016
+@@ -16,6 +16,9 @@
+       profile: {}
+     }
+   },
++  computed: {
++    $Vue() { return Vue; }
++  },
+   methods: {
+     myName() {
+       return this.$route.params.name + ' Taro';
+--- test/unit/components/test.js	Thu Nov 24 07:51:09 2016
++++ test/unit/components/test.js	Thu Nov 24 08:05:41 2016
+@@ -20,31 +20,35 @@
+   // AssertionError: expected {} to deeply equal { nickname: 'hoge' } (node_modules/chai/chai.js:210)
+   it('vue-resourceを利用した場合のテストケース1', (done) => {
+     let profile = { nickname : 'hoge' };
+-    Vue.http = {
++
++    const vm = new Test()
++    vm.$Vue.http = {
+       get () {
+-        return Promise.resolve(profile)
++        return Promise.resolve({
++          json () { return profile }
++        });
+       }
+     }
+-
+-    const vm = new Test()
+     vm.fetchProfile1();
+-    Vue.nextTick(() => {
++    setTimeout(() => {
+       expect(vm.profile).to.be.eql(profile)
+       done();
+-    })
++    }, 0)
+ 
+   });
+ 
+   // timeout of 2000ms exceeded. Ensure the done() callback is being called in this test.
+   it('vue-resourceを利用した場合のテストケース2', (done) => {
+     let profile = { nickname : 'hoge' };
+-    Vue.http = {
++
++    const vm = new Test()
++    vm.$Vue.http = {
+       get () {
+-        return Promise.resolve(profile)
++        return Promise.resolve({
++          json () { return profile }
++        });
+       }
+     }
+-
+-    const vm = new Test()
+     vm.fetchProfile2(function(flag) {
+       //expect(flag).to.be.eql(true)
+       expect(vm.profile).to.be.eql(profile)
+@@ -55,13 +59,15 @@
+   // timeout of 2000ms exceeded. Ensure the done() callback is being called in this test.
+   it('vue-resourceを利用した場合のテストケース3', (done) => {
+     let profile = { nickname : 'hoge' };
+-    Vue.http = {
++
++    const vm = new Test()
++    vm.$Vue.http = {
+       get () {
+-        return Promise.resolve(profile)
++        return Promise.resolve({
++          json () { return profile }
++        });
+       }
+     }
+-
+-    const vm = new Test()
+     vm.fetchProfile3().then(function() {
+       Vue.nextTick(function() {
+         expect(vm.profile).to.be.eql(profile);

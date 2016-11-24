@@ -16,6 +16,9 @@ export default {
       profile: {}
     }
   },
+  computed: {
+    $Vue() { return Vue; }
+  },
   methods: {
     myName() {
       return this.$route.params.name + ' Taro';

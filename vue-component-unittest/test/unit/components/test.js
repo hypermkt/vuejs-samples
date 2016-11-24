@@ -17,34 +17,36 @@ describe('Testコンポーネント', () => {
     expect(vm.myName()).to.be.eql('Yamada Taro')
   });
 
-  // AssertionError: expected {} to deeply equal { nickname: 'hoge' } (node_modules/chai/chai.js:210)
   it('vue-resourceを利用した場合のテストケース1', (done) => {
     let profile = { nickname : 'hoge' };
-    Vue.http = {
-      get () {
-        return Promise.resolve(profile)
-      }
-    }
 
     const vm = new Test()
+    vm.$Vue.http = {
+      get () {
+        return Promise.resolve({
+          json () { return profile }
+        });
+      }
+    }
     vm.fetchProfile1();
-    Vue.nextTick(() => {
+    setTimeout(() => {
       expect(vm.profile).to.be.eql(profile)
       done();
-    })
+    }, 0)
 
   });
 
-  // timeout of 2000ms exceeded. Ensure the done() callback is being called in this test.
   it('vue-resourceを利用した場合のテストケース2', (done) => {
     let profile = { nickname : 'hoge' };
-    Vue.http = {
-      get () {
-        return Promise.resolve(profile)
-      }
-    }
 
     const vm = new Test()
+    vm.$Vue.http = {
+      get () {
+        return Promise.resolve({
+          json () { return profile }
+        });
+      }
+    }
     vm.fetchProfile2(function(flag) {
       //expect(flag).to.be.eql(true)
       expect(vm.profile).to.be.eql(profile)
@@ -52,16 +54,17 @@ describe('Testコンポーネント', () => {
     });
   });
 
-  // timeout of 2000ms exceeded. Ensure the done() callback is being called in this test.
   it('vue-resourceを利用した場合のテストケース3', (done) => {
     let profile = { nickname : 'hoge' };
-    Vue.http = {
-      get () {
-        return Promise.resolve(profile)
-      }
-    }
 
     const vm = new Test()
+    vm.$Vue.http = {
+      get () {
+        return Promise.resolve({
+          json () { return profile }
+        });
+      }
+    }
     vm.fetchProfile3().then(function() {
       Vue.nextTick(function() {
         expect(vm.profile).to.be.eql(profile);
