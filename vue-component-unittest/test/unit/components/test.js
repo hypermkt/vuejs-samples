@@ -4,6 +4,10 @@ import _Test from '../../../src/js/components/test.vue';
 const Test = Vue.extend(_Test);
 
 describe('Testコンポーネント', () => {
+  it('足し算', () => {
+    expect(_Test.methods.add(1, 2)).to.be.eql(3);
+  })
+
   it('メソッドが存在する', () => {
     expect(_Test.methods.myName).to.be.a('function');
   });

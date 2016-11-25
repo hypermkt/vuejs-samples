@@ -20,6 +20,9 @@ export default {
     $Vue() { return Vue; }
   },
   methods: {
+    add(a, b) {
+      return a + b;
+    },
     myName() {
       return this.$route.params.name + ' Taro';
     },
